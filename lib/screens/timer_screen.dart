@@ -67,7 +67,7 @@ class _TimerScreenState extends State<TimerScreen> {
           Flexible(
             flex: 1,
             child: Container(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               // color: Colors.black,
               child: Text(
                 timeFormat(totalSeconds),
@@ -79,49 +79,78 @@ class _TimerScreenState extends State<TimerScreen> {
             ),
           ),
           Flexible(
-            flex: 3,
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    iconSize: 120,
-                    color: Theme.of(context).cardColor,
-                    // onPressed: onPlayPressed,
-                    onPressed: isOnGmae ? onContinuePressed : onResetPressed,
-                    icon: isOnGmae
-                        ? const Icon(Icons.restore_outlined)
-                        : const Icon(Icons.stop_circle_outlined),
-                  ),
-                  IconButton(
-                    iconSize: 120,
-                    color: Theme.of(context).cardColor,
-                    // onPressed: onPlayPressed,
-                    onPressed: isOnGmae ? onPausePressed : onPlayPressed,
-                    icon: isOnGmae
-                        ? const Icon(Icons.pause_circle_outline)
-                        : const Icon(Icons.play_circle_outline),
-                  ),
-                ],
-              ),
+            flex: 1,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  iconSize: 120,
+                  color: Theme.of(context).cardColor,
+                  // onPressed: onPlayPressed,
+                  onPressed: isOnGmae ? onContinuePressed : onResetPressed,
+                  icon: isOnGmae
+                      ? const Icon(Icons.restore_outlined)
+                      : const Icon(Icons.stop_circle_outlined),
+                ),
+                IconButton(
+                  iconSize: 120,
+                  color: Theme.of(context).cardColor,
+                  // onPressed: onPlayPressed,
+                  onPressed: isOnGmae ? onPausePressed : onPlayPressed,
+                  icon: isOnGmae
+                      ? const Icon(Icons.pause_circle_outline)
+                      : const Icon(Icons.play_circle_outline),
+                ),
+              ],
             ),
           ),
+          const SizedBox(
+            height: 30,
+          ),
           Flexible(
-              flex: 1,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                    child: Column(
-                      children: const [
-                        Text("현재시각"),
-                      ],
-                    ),
-                  ))
-                ],
-              )),
+            flex: 1,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      Center(
+                        child: Column(
+                          children: const [
+                            Text(
+                              "123",
+                              style: TextStyle(fontSize: 50),
+                            ),
+                            Text(
+                              "123",
+                              style: TextStyle(fontSize: 50),
+                            ),
+                            Text(
+                              "123",
+                              style: TextStyle(fontSize: 50),
+                            ),
+                            Text(
+                              "123",
+                              style: TextStyle(fontSize: 50),
+                            ),
+                            Text(
+                              "123",
+                              style: TextStyle(fontSize: 50),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
+      bottomNavigationBar: null,
     );
   }
 }
