@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({
@@ -16,6 +17,8 @@ class _TimerScreenState extends State<TimerScreen> {
   int totalSeconds = fiftyMinutes;
   bool isOnGmae = false;
   late Timer timer;
+  String currentTime = '';
+  List<String> recodeTexts = [];
 
   onPlayPressed() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -51,6 +54,10 @@ class _TimerScreenState extends State<TimerScreen> {
 
   void onContinuePressed() {
     print(timeFormat(totalSeconds));
+    setState(() {
+      currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+      recodeTexts.add("$currentTime 정영수 장땡");
+    });
   }
 
   String timeFormat(int seconds) {
@@ -67,6 +74,7 @@ class _TimerScreenState extends State<TimerScreen> {
           Flexible(
             flex: 1,
             child: Container(
+              height: double.infinity,
               alignment: Alignment.center,
               // color: Colors.black,
               child: Text(
@@ -80,72 +88,56 @@ class _TimerScreenState extends State<TimerScreen> {
           ),
           Flexible(
             flex: 1,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  iconSize: 120,
-                  color: Theme.of(context).cardColor,
-                  // onPressed: onPlayPressed,
-                  onPressed: isOnGmae ? onContinuePressed : onResetPressed,
-                  icon: isOnGmae
-                      ? const Icon(Icons.restore_outlined)
-                      : const Icon(Icons.stop_circle_outlined),
-                ),
-                IconButton(
-                  iconSize: 120,
-                  color: Theme.of(context).cardColor,
-                  // onPressed: onPlayPressed,
-                  onPressed: isOnGmae ? onPausePressed : onPlayPressed,
-                  icon: isOnGmae
-                      ? const Icon(Icons.pause_circle_outline)
-                      : const Icon(Icons.play_circle_outline),
-                ),
-              ],
+            child: SizedBox(
+              // color: Colors.black,
+              height: double.infinity,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    // onPressed: onPlayPressed,
+                    onPressed: isOnGmae ? onContinuePressed : onResetPressed,
+                    icon: isOnGmae
+                        ? const Icon(Icons.restore_outlined)
+                        : const Icon(Icons.stop_circle_outlined),
+                  ),
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    // onPressed: onPlayPressed,
+                    onPressed: isOnGmae ? onPausePressed : onPlayPressed,
+                    icon: isOnGmae
+                        ? const Icon(Icons.pause_circle_outline)
+                        : const Icon(Icons.play_circle_outline),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(
             height: 30,
           ),
           Flexible(
-            flex: 1,
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      Center(
-                        child: Column(
-                          children: const [
-                            Text(
-                              "123",
-                              style: TextStyle(fontSize: 50),
-                            ),
-                            Text(
-                              "123",
-                              style: TextStyle(fontSize: 50),
-                            ),
-                            Text(
-                              "123",
-                              style: TextStyle(fontSize: 50),
-                            ),
-                            Text(
-                              "123",
-                              style: TextStyle(fontSize: 50),
-                            ),
-                            Text(
-                              "123",
-                              style: TextStyle(fontSize: 50),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+            flex: 2,
+            child: SizedBox(
+              // color: Colors.black,
+              height: double.infinity,
+              child: Column(
+                // mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: recodeTexts.length,
+                      itemBuilder: (context, index) {
+                        return Text(recodeTexts[index]);
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
